@@ -8,6 +8,7 @@ class Contact extends Component {
                 <div className="row text-center">
                     <h2>Contact</h2>
                 </div>
+                <Form onSubmit={this.handleSubmit} />
                 <div></div>
             </div>
         )
