@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 
 class Contact extends Component {
+    handleSubmit(values, dispatch) {
+        console.log(values)
+    }
     render() {
         return (
             <div className="container">
