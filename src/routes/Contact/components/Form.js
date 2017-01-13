@@ -7,19 +7,41 @@ const Form = (props) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name</label>
-             <Field name="name" component="input" type="text" placeholder="Name" className="form-control" />
+             <Field
+                 name="name"
+                 component="input"
+                 type="text"
+                 placeholder="Name"
+                 className="form-control" />
           </div>
           <div className="form-group">
             <label>E-mail</label>
-             <Field name="email" component="input" type="email" placeholder="E-mail" className="form-control" />
+             <Field
+                 name="email"
+                 component="input"
+                 type="email"
+                 placeholder="E-mail"
+                 className="form-control" />
           </div>
           <div className="form-group">
             <label>Message</label>
-              <Field name="message" component="textarea" className="form-control" />
+              <Field
+                  name="message"
+                  component="textarea"
+                  className="form-control" />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Send</button>
-            <button type="button" className="btn btn-default" disabled={pristine || submitting} onClick={reset}>Reset</button>
+            <button
+                type="submit"
+                className="btn btn-primary" 
+                disabled={pristine || submitting}>Send
+            </button>
+            <button
+                type="button"
+                className="btn btn-default"
+                disabled={pristine || submitting}
+                onClick={reset}>Reset
+            </button>
           </div>
         </form>
       )
