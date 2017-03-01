@@ -6,34 +6,34 @@ Just a simple example how to use controlled components with redux-form.
 I had a lot of headache till find this solution. I hope it help you all.
 It's very easy and better than handle components manually
 
-# index.js
+# modules/index.js
 ```javascript
 /*
 * Redux
 */
-import { Provider } from 'react-redux' // To connect React and Redux
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { reducer as formReducer } from 'redux-form' // The form
-
+import { reducer as formReducer } from 'redux-form'
 /*
 * Reducers
 */
+import Contact from './Contact'
 const combineReducer = combineReducers({
-    form : formReducer
+    form : formReducer,
+    Contact
 })
 
 /*
 * Store
 */
-const store = createStore(combineReducer, {}, compose(
+export const store = createStore(combineReducer, {}, compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 ```
 It´s just redux basic configuration...
 
-# Form.js
+# components/Form.js
 
 ```javascript
 const Form = (props) => {
@@ -92,37 +92,33 @@ export default reduxForm({
 ```javascript
 class Contact extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            formData : null
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    handleSubmit(values, dispatch) {
-        this.setState({ formData : values })
-
+    handleSubmit = (values, dispatch) => {
+        dispatch(contactSent(values))
         dispatch(reset('contactForm'))
     }
 
     render() {
-        const { formData } = this.state
+        const {data} = this.props
 
         return (
-            <div className="container">
-                <div className="row text-center">
-                    <h2>Contact</h2>
+            <div className="row">
+                <div className="col-md-8 col-md-offset-2">
+                    <div className="row text-center">
+                        <h2>Contact</h2>
+                    </div>
+                    <Form onSubmit={this.handleSubmit}/>
+                    <div>Form data: {data
+                        ? JSON.stringify(data)
+                        : null
+                    }
+                    </div>
                 </div>
-                <Form onSubmit={this.handleSubmit} />
-                <div>Form data: { JSON.stringify(formData) }</div>
             </div>
         )
     }
 }
-export default Contact
+
+export default connect((state) => state.Contact)(Contact)
 ```
 
 That's it!
