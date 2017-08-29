@@ -1,24 +1,25 @@
-const CONTACT_SENT = 'modules/Contact/CONTACT_SENT'
+const CONTACT_SENT = 'modules/Contact/SENT'
 
 export const contactSent = values => {
-    return {
-        type    : CONTACT_SENT,
-        payload : values
-    }
+  return {
+    type: CONTACT_SENT,
+    payload: values
+  }
 }
 
 const initialState = {
-    data : null
+  data: null
 }
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case CONTACT_SENT:
-            return {
-                ...state,
-                data : action.payload
-            }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case CONTACT_SENT:
+      return {
+        ...state,
+        data: action.payload
+      }
+
+    default:
+      return state
+  }
 }
